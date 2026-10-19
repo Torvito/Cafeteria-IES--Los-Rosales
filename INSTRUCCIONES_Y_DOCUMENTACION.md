@@ -198,7 +198,26 @@ VITE_SUPABASE_ANON_KEY="eyJhbGciOi..."
 
 ---
 
-## 8. Despliegue e Instalación
+## 8. Envío de Pedidos por WhatsApp
+
+- **Número receptor configurado:** `34615741675` (formato internacional estándar sin signo + ni espacios).
+- **Enlace de integración:** `https://wa.me/34615741675?text=...` con texto URL-encoded.
+- **Ubicación del botón:**
+  - En la bandeja/carrito de compra (`CartDrawer.tsx`): botón visible **“Enviar pedido por WhatsApp”**.
+  - En el resumen y seguimiento del pedido (`OrderStatusTracker.tsx`): botón visible **“Enviar pedido por WhatsApp”**.
+- **Contenido del mensaje generado:**
+  - Referencia del pedido (`#ROS-XXXX`) si ya ha sido emitido.
+  - Nombre del comensal y rol en el centro (estudiante / profesor / personal).
+  - Franja horaria de recogida solicitada.
+  - Listado detallado de productos con cantidades y precios parciales.
+  - Opciones y combinaciones seleccionadas de los combos (principal, bebida, patatas) y personalizaciones (tipo de leche, etc.).
+  - Total exacto en euros.
+  - Nota recordatoria: Al abrir WhatsApp, el usuario debe pulsar el botón de envío nativo para que la cafetería reciba la comanda.
+- **Compatibilidad:** Compatible automáticamente con WhatsApp en dispositivos móviles (Android/iOS) y con WhatsApp Web / Escritorio en PC.
+
+---
+
+## 9. Despliegue e Instalación
 
 ```bash
 # Instalar dependencias

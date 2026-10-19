@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { X, Trash2, ArrowRight, ShoppingBag, Clock, AlertCircle } from 'lucide-react';
+import { X, Trash2, ArrowRight, ShoppingBag, Clock, AlertCircle, MessageCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { CheckoutModal } from './CheckoutModal';
+import { getWhatsAppOrderUrl } from '../utils/whatsapp';
 
 export const CartDrawer: React.FC = () => {
   const {
@@ -188,7 +189,7 @@ export const CartDrawer: React.FC = () => {
               </div>
 
               {settings.allowPreorders ? (
-                <div>
+                <div className="space-y-2.5">
                   <button
                     onClick={() => setShowCheckoutModal(true)}
                     className="w-full py-3.5 px-4 rounded-xl bg-[#0F3D2E] hover:bg-[#16503c] text-white font-bold text-sm shadow-md transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2"
@@ -196,19 +197,49 @@ export const CartDrawer: React.FC = () => {
                     <span>Confirmar Pedido Anticipado</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
-                  <p className="text-[11px] text-stone-400 text-center mt-2">
-                    Pago directo al recoger en la barra de la cafetería.
+
+                  <a
+                    href={getWhatsAppOrderUrl({
+                      items: cart,
+                      totalAmount: cartTotal,
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-stone-950 font-bold text-sm shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 text-center"
+                  >
+                    <MessageCircle className="w-4 h-4 text-stone-950" />
+                    <span>Enviar pedido por WhatsApp</span>
+                  </a>
+
+                  <p className="text-[10px] text-stone-400 text-center leading-tight">
+                    Al pulsar se abrirá WhatsApp (34615741675). Recuerda pulsar &ldquo;Enviar&rdquo; para que la cafetería reciba tu mensaje.
                   </p>
                 </div>
               ) : (
-                <div className="bg-amber-50 border border-amber-200 p-3 rounded-xl text-center space-y-2">
-                  <div className="flex items-center justify-center gap-1.5 text-amber-800 text-xs font-bold">
-                    <AlertCircle className="w-4 h-4 shrink-0" />
-                    <span>Pedidos anticipados no autorizados temporalmente</span>
+                <div className="space-y-3">
+                  <div className="bg-amber-50 border border-amber-200 p-3 rounded-xl text-center space-y-2">
+                    <div className="flex items-center justify-center gap-1.5 text-amber-800 text-xs font-bold">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>Pedidos anticipados no autorizados temporalmente</span>
+                    </div>
+                    <p className="text-[11px] text-amber-700 leading-tight">
+                      El servicio anticipado está en pausa. Puedes consultar el menú y realizar tu compra directamente en el mostrador del centro.
+                    </p>
                   </div>
-                  <p className="text-[11px] text-amber-700 leading-tight">
-                    El servicio anticipado está en pausa. Puedes consultar el menú y realizar tu compra directamente en el mostrador del centro.
-                  </p>
+
+                  <a
+                    href={getWhatsAppOrderUrl({
+                      items: cart,
+                      totalAmount: cartTotal,
+                    })}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-stone-950 font-bold text-sm shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 text-center"
+                  >
+                    <MessageCircle className="w-4 h-4 text-stone-950" />
+                    <span>Enviar pedido por WhatsApp</span>
+                  </a>
+
                   <button
                     onClick={() => setIsCartOpen(false)}
                     className="w-full py-2 bg-stone-800 text-white text-xs font-semibold rounded-lg hover:bg-stone-700 cursor-pointer"

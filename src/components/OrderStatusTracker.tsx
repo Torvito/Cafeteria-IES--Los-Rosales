@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Search, Clock, CheckCircle2, AlertCircle, ChefHat, Sparkles, PackageCheck, Ban } from 'lucide-react';
+import { Search, Clock, CheckCircle2, AlertCircle, ChefHat, Sparkles, PackageCheck, Ban, MessageCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { OrderStatus } from '../types';
+import { getWhatsAppOrderUrl } from '../utils/whatsapp';
 
 export const OrderStatusTracker: React.FC = () => {
   const { orders, trackingOrderId, setTrackingOrderId, setActiveView } = useApp();
@@ -258,6 +259,30 @@ export const OrderStatusTracker: React.FC = () => {
                 <span className="font-bold text-stone-800">Observaciones para barra:</span> {targetOrder.notes}
               </div>
             )}
+
+            {/* WhatsApp Share Button */}
+            <div className="p-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl space-y-2">
+              <a
+                href={getWhatsAppOrderUrl({
+                  orderRef: targetOrder.id,
+                  customerName: targetOrder.customerName,
+                  customerRole: targetOrder.customerRole,
+                  pickupSlot: targetOrder.pickupSlot,
+                  items: targetOrder.items,
+                  totalAmount: targetOrder.totalAmount,
+                  notes: targetOrder.notes,
+                })}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-stone-950 font-bold text-xs sm:text-sm shadow-md transition-all active:scale-98 flex items-center justify-center gap-2 text-center"
+              >
+                <MessageCircle className="w-4 h-4 text-stone-950" />
+                <span>Enviar pedido por WhatsApp</span>
+              </a>
+              <p className="text-[11px] text-stone-600 text-center leading-tight">
+                Al pulsar se abrirá WhatsApp con el resumen de tu comanda (<strong>#{targetOrder.id}</strong>) para el número 34615741675. Recuerda pulsar &ldquo;Enviar&rdquo; en la aplicación para que la cafetería lo reciba.
+              </p>
+            </div>
           </div>
         </div>
       ) : (
