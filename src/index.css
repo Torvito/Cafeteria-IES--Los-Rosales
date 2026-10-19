@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-green-dark: #0F3D2E;
+    --color-cream: #F8F1E3;
+    --color-gold: #B88B4A;
+    --color-rose: #C93F3F;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Custom scrollbar for horizontal category pill row and modals */
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 61, 46, 0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(184, 139, 74, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(184, 139, 74, 0.7);
+}

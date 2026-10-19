@@ -1,0 +1,6 @@
+{
+  "name": "Cafetería IES Los Rosales",
+  "description": "Aplicación web oficial de la Cafetería IES Los Rosales: menú digital, combos, desayunos, bocadillos, pedidos anticipados y panel de gestión.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
